@@ -1,0 +1,4 @@
+export const ASYNC_START = 'ASYNC_START';
+export const ASYNC_END = 'ASYNC_END';
+export const ADDRESS_LOOKUP = 'ADDRESS_LOOKUP';
+export const UPDATE_FIELD_ADDRESS = 'UPDATE_FIELD_ADDRESS';
