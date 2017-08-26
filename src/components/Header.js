@@ -5,7 +5,12 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
-import { TOGGLE_MENU, SET_NAVIGATION_OPEN } from '../constants/actionTypes';
+import {
+    TOGGLE_MENU,
+    SET_NAVIGATION_OPEN,
+    CHANGE_PAGE
+} from '../constants/actionTypes';
+import { ADD_PAGE, LIST_PAGE } from '../constants/pages';
 
 const mapStateToProps = state => ({ ...state.navigation });
 
@@ -13,7 +18,9 @@ const mapDispatchToProps = dispatch => ({
     onToggle: () => 
         dispatch({ type: TOGGLE_MENU }),
     setOpen: (open) =>
-        dispatch({ type: SET_NAVIGATION_OPEN, open })
+        dispatch({ type: SET_NAVIGATION_OPEN, open }),
+    onChangePage: (page) =>
+        dispatch({ type: CHANGE_PAGE, page })
 })
 
 class Header extends React.Component {
@@ -21,6 +28,8 @@ class Header extends React.Component {
         super();
         this.handleToggle = (ev) => this.props.onToggle();
         this.setOpen = (open) => this.props.setOpen(open);
+        this.viewAddPage = (ev) => this.props.onChangePage(ADD_PAGE);
+        this.viewListPage = (ev) => this.props.onChangePage(LIST_PAGE);
     }
     render() {
         console.log(this.props);
@@ -38,8 +47,13 @@ class Header extends React.Component {
                 >
                     <Subheader>Neo wallet</Subheader>
                     <Divider />
-                    <MenuItem>Menu Item</MenuItem>
-                    <MenuItem>Menu Item 2</MenuItem>
+                    <MenuItem
+                        onClick={this.viewAddPage}
+                    >Add wallet</MenuItem>
+                    <MenuItem
+                        onClick={this.viewListPage}
+                    >
+                    List wallets</MenuItem>
                 </Drawer>
             </div>
         );

@@ -2,13 +2,15 @@ import {
     ADDRESS_LOOKUP,
     UPDATE_FIELD_ADDRESS,
     TOGGLE_MENU,
-    SET_NAVIGATION_OPEN
+    SET_NAVIGATION_OPEN,
+    CHANGE_PAGE
 } from './constants/actionTypes'
+import { ADD_PAGE, LIST_PAGE } from './constants/pages';
 
 const defaultState = {
     navigation: {
         open: false,
-        currentPage: 'home',
+        currentPage: LIST_PAGE
     }
 };
 
@@ -31,6 +33,7 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 navigation: {
+                    ...state.navigation,
                     open: !state.navigation.open
                 }
             }
@@ -38,7 +41,16 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 navigation: {
+                    ...state.navigation,
                     open: action.open
+                }
+            }
+        case CHANGE_PAGE:
+            return {
+                ...state,
+                navigation: {
+                    ...state.navigation,
+                    currentPage: action.page
                 }
             }
         default:
