@@ -25,4 +25,6 @@ const Wallet = {
         requests.get('/block/get_current_height')
 }
 
-export default Wallet;
+export default {
+  Wallet
+};
