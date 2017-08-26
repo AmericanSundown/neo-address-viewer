@@ -7,7 +7,8 @@ import {
 
 const defaultState = {
     navigation: {
-        open: false
+        open: false,
+        currentPage: 'home',
     }
 };
 

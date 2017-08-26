@@ -5,13 +5,20 @@ import AddressForm from './AddressForm';
 import AssetDisplay from './AssetDisplay';
 import Header from './Header';
 
+const style = {
+  maxWidth: 700,
+  margin: "auto"
+}
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App1">
         <Header />
         <AddressForm />
-        <AssetDisplay />
+        <div style={style}>
+          <AssetDisplay />
+        </div>
       </div>
     );
   }
