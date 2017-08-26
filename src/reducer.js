@@ -1,6 +1,15 @@
-import { ADDRESS_LOOKUP, UPDATE_FIELD_ADDRESS } from './constants/actionTypes'
+import {
+    ADDRESS_LOOKUP,
+    UPDATE_FIELD_ADDRESS,
+    TOGGLE_MENU,
+    SET_NAVIGATION_OPEN
+} from './constants/actionTypes'
 
-const defaultState = {};
+const defaultState = {
+    navigation: {
+        open: false
+    }
+};
 
 export default (state = defaultState, action) => {
     switch (action.type) {
@@ -17,6 +26,20 @@ export default (state = defaultState, action) => {
                 ...state,
                 [action.key]: action.value
             };
+        case TOGGLE_MENU:
+            return {
+                ...state,
+                navigation: {
+                    open: !state.navigation.open
+                }
+            }
+        case SET_NAVIGATION_OPEN:
+            return {
+                ...state,
+                navigation: {
+                    open: action.open
+                }
+            }
         default:
             return state;
     }
