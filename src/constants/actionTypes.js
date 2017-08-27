@@ -1,6 +1,7 @@
 export const ASYNC_START = 'ASYNC_START';
 export const ASYNC_END = 'ASYNC_END';
 export const ADDRESS_LOOKUP = 'ADDRESS_LOOKUP';
+export const LOOKUP_ADDRESS = 'LOOKUP_ADDRESS';
 export const ADD_WALLET = 'ADD_WALLET';
 export const REMOVE_WALLET = 'REMOVE_WALLET';
 export const UPDATE_FIELD_ADDRESS = 'UPDATE_FIELD_ADDRESS';

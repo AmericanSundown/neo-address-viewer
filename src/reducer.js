@@ -4,7 +4,8 @@ import {
     TOGGLE_MENU,
     SET_NAVIGATION_OPEN,
     CHANGE_PAGE,
-    ADD_WALLET
+    ADD_WALLET,
+    LOOKUP_ADDRESS
 } from './constants/actionTypes'
 import { ADD_PAGE, LIST_PAGE } from './constants/pages';
 
@@ -71,6 +72,19 @@ export default (state = defaultState, action) => {
                     ...state.wallet,
                     name: action.payload.name,
                     address: action.payload.address
+                }
+            };
+        case LOOKUP_ADDRESS:
+            return {
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    address: action.address,
+                    name: action.name,
+                    assets: {
+                        neo: action.payload.asset[0],
+                        gas: action.payload.asset[1]
+                    }
                 }
             };
         default:
