@@ -1,6 +1,8 @@
 import {
     ASYNC_START,
-    ASYNC_END
+    ASYNC_END,
+    ADD_WALLET,
+    REMOVE_WALLET
 } from './constants/actionTypes';
 
 const promiseMiddleware = store => next => action => {
@@ -27,10 +29,23 @@ const promiseMiddleware = store => next => action => {
     }
 
     next(action);
-}
+};
+
+const localStorageMiddleware = store => next => action => {
+    if (action.type === ADD_WALLET) {
+        if (!action.error) {
+            console.log('ACTION', action);
+            window.localStorage.setItem('wallet', action.payload);
+        }
+    } else if (action.type === REMOVE_WALLET) {
+        window.localStorage.setItem('wallet', '');
+    }
+  
+    next(action);
+  };
 
 function isPromise(v) {
     return v && typeof v.then === 'function';
-}
+};
 
-export default promiseMiddleware
+export { promiseMiddleware, localStorageMiddleware }

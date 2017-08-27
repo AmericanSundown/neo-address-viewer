@@ -1,10 +1,10 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import promiseMiddleWare from './middleware';
+import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import reducer from './reducer';
 
 const getMiddleware = () => {
-    return applyMiddleware(promiseMiddleWare);
+    return applyMiddleware(promiseMiddleware, localStorageMiddleware);
 }
 
 const store = createStore(reducer, composeWithDevTools(getMiddleware()))

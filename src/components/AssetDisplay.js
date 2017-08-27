@@ -9,10 +9,11 @@ const mapStateToProps = state => ({ ...state });
 class AssetDisplay extends React.Component {
     render() {
         const noneValue = "TBA";
-        const neoValue = this.props.assets ? this.props.assets.neo.value : noneValue;
-        const gasValue = this.props.assets ? this.props.assets.gas.value : noneValue;
-        const walletName = this.props.name ? this.props.name : noneValue;
-        const walletAddress = this.props.address ? this.props.address : noneValue;
+        const wallet = this.props.wallet;
+        const neoValue = wallet.assets.neo ? wallet.assets.neo.value : noneValue;
+        const gasValue = wallet.assets.gas ? wallet.assets.gas.value : noneValue;
+        const walletName = wallet.name ? wallet.name : noneValue;
+        const walletAddress = wallet.address ? wallet.address : noneValue;
         return (
             <div>
                 <List>

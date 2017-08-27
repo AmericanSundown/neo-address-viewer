@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import agent from '../agent';
 import { connect } from 'react-redux';
-import { ADDRESS_LOOKUP, UPDATE_FIELD_ADDRESS } from '../constants/actionTypes';
+import { ADD_WALLET, ADDRESS_LOOKUP, UPDATE_FIELD_ADDRESS } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state });
 
@@ -14,8 +13,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'address', value }),
     onChangeName: (value) =>
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'name', value }),
-    onLookup: address =>
-        dispatch({ type: ADDRESS_LOOKUP, payload: agent.Wallet.lookup(address) })
+    onAddWallet: (address, name) => {
+        const payload = { address, name };
+        dispatch({ type: ADD_WALLET, payload })
+    }
 })
 
 const styles = {
@@ -37,33 +38,34 @@ class AddressForm extends Component {
         super();
         this.changeAddress = ev => this.props.onChangeAddress(ev.target.value);
         this.changeName = ev => this.props.onChangeName(ev.target.value);
-        this.lookupWallet = address => ev => {
+        this.addWallet = (address, name) => ev => {
             ev.preventDefault();
-            this.props.onLookup(address);
+            this.props.onAddWallet(address, name);
         };
     }
 
     render() {
         const address = this.props.address;
+        const name = this.props.name;
         return (
             <div style={styles.wrapper}>
                 <TextField
                     style={styles.inputField}
                     hintText=""
-                    floatingLabelText="wallet name"
+                    floatingLabelText="type wallet name"
                     onChange={this.changeName}
                 />
                 <TextField
                     style={styles.inputField}
                     hintText=""
-                    floatingLabelText="wallet address"
+                    floatingLabelText="type wallet address"
                     onChange={this.changeAddress}
                 />
                 <RaisedButton
                     label="Add"
                     primary={true}
                     style={styles.button}
-                    onClick={this.lookupWallet(address)}
+                    onClick={this.addWallet(address, name)}
                 />
             </div>
         );
