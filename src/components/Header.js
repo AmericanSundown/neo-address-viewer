@@ -32,7 +32,6 @@ class Header extends React.Component {
         this.viewListPage = (ev) => this.props.onChangePage(LIST_PAGE);
     }
     render() {
-        console.log(this.props);
         return (
             <div>
                 <AppBar

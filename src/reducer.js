@@ -5,6 +5,7 @@ import {
     SET_NAVIGATION_OPEN,
     CHANGE_PAGE,
     ADD_WALLET,
+    REMOVE_WALLET,
     LOOKUP_ADDRESS
 } from './constants/actionTypes'
 import { ADD_PAGE, LIST_PAGE } from './constants/pages';
@@ -74,6 +75,15 @@ export default (state = defaultState, action) => {
                     address: action.payload.address
                 }
             };
+        case REMOVE_WALLET:
+            return {
+                ...state,
+                wallet: {
+                    name: "",
+                    address: "",
+                    assets: {}
+                }
+            }
         case LOOKUP_ADDRESS:
             return {
                 ...state,

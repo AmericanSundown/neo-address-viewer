@@ -1,8 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import { REMOVE_WALLET } from '../constants/actionTypes'
+
+const mapDispatchToProps = dispatch => ({
+    onRemove: (address) =>
+        dispatch({ type: REMOVE_WALLET, address })
+});
 
 class AssetCard extends React.Component {
+    constructor() {
+        super();
+        this.removeWallet = (ev) => this.props.onRemove(this.props.address);
+    }
     render() {
         return (
             <Card>
@@ -14,7 +25,7 @@ class AssetCard extends React.Component {
                 />
                 <CardActions>
                 <FlatButton label="Edit" />
-                <FlatButton label="Delete" />
+                <FlatButton label="Delete" onClick={this.removeWallet}/>
                 </CardActions>
                 <CardText expandable={true}>
                     <p>Address: {this.props.address}</p>
@@ -28,4 +39,4 @@ class AssetCard extends React.Component {
     }
 }
 
-export default AssetCard;
+export default connect(null, mapDispatchToProps)(AssetCard);

@@ -11,10 +11,12 @@ const mapStateToProps = state => ({ ...state });
 const mapDispatchToProps = dispatch => ({
     onLoad: () => {
         const wallet = JSON.parse(window.localStorage.getItem('wallet'));
-        const address = wallet.address;
-        const name = wallet.name;
-        const payload = agent.Wallet.lookup(address);
-        dispatch({ type: LOOKUP_ADDRESS, payload, name, address })
+        if (wallet) {
+            const address = wallet.address;
+            const name = wallet.name;
+            const payload = agent.Wallet.lookup(address);
+            dispatch({ type: LOOKUP_ADDRESS, payload, name, address });
+        };
     }
 })
 
