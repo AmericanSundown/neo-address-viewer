@@ -2,6 +2,7 @@ import {
     ASYNC_START,
     ASYNC_END,
     ADD_WALLET,
+    EDIT_WALLET,
     REMOVE_WALLET
 } from './constants/actionTypes';
 
@@ -32,7 +33,7 @@ const promiseMiddleware = store => next => action => {
 };
 
 const localStorageMiddleware = store => next => action => {
-    if (action.type === ADD_WALLET) {
+    if (action.type === ADD_WALLET || action.type === EDIT_WALLET) {
         if (!action.error) {
             window.localStorage.setItem('wallet', JSON.stringify(action.payload));
         }

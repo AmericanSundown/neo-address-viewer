@@ -9,22 +9,25 @@ import agent from '../agent';
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: () => {
-        const wallet = JSON.parse(window.localStorage.getItem('wallet'));
-        if (wallet) {
-            const address = wallet.address;
-            const name = wallet.name;
+    onLoad: (address, name) => {
+        if (address) {
             const payload = agent.Wallet.lookup(address);
-            dispatch({ type: LOOKUP_ADDRESS, payload, name, address });
-        };
+            dispatch({ type: LOOKUP_ADDRESS, payload, address, name });
+        }
     }
 })
 
 class AssetDisplay extends React.Component {
-    componentWillMount() {
-        this.props.onLoad();
+    constructor() {
+        super();
     }
-
+    componentWillMount() {
+        let wallet = this.props.wallet;
+        if (window.localStorage.key('wallet')) {
+            wallet = JSON.parse(window.localStorage.getItem('wallet'));
+        }
+        this.props.onLoad(wallet.address, wallet.name);
+    }
     render() {
         const noneValue = "TBA";
         const wallet = this.props.wallet;

@@ -6,7 +6,10 @@ import {
     CHANGE_PAGE,
     ADD_WALLET,
     REMOVE_WALLET,
-    LOOKUP_ADDRESS
+    EDIT_WALLET,
+    LOOKUP_ADDRESS,
+    OPEN_EDIT,
+    CLOSE_EDIT
 } from './constants/actionTypes'
 import { ADD_PAGE, LIST_PAGE } from './constants/pages';
 
@@ -15,7 +18,8 @@ const defaultState = {
     name: "",
     navigation: {
         open: false,
-        currentPage: LIST_PAGE
+        currentPage: LIST_PAGE,
+        edit: {}
     },
     wallet: {
         name: "",
@@ -75,6 +79,19 @@ export default (state = defaultState, action) => {
                     address: action.payload.address
                 }
             };
+        case EDIT_WALLET:
+            return {
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    address: action.payload.address,
+                    name: action.payload.name,
+                    assets: {
+                        neo: action.payload.asset[0],
+                        gas: action.payload.asset[1]
+                    }
+                }
+            };
         case REMOVE_WALLET:
             return {
                 ...state,
@@ -82,6 +99,26 @@ export default (state = defaultState, action) => {
                     name: "",
                     address: "",
                     assets: {}
+                }
+            };
+        case OPEN_EDIT:
+            return {
+                ...state,
+                navigation: {
+                    ...state.navigation,
+                    edit: {
+                        open: true
+                    }
+                }
+            };
+        case CLOSE_EDIT:
+            return {
+                ...state,
+                navigation: {
+                    ...state.navigation,
+                    edit: {
+                        open: false
+                    }
                 }
             }
         case LOOKUP_ADDRESS:
