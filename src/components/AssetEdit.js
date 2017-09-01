@@ -39,6 +39,12 @@ class AssetEdit extends React.Component {
         this.openEdit = (ev) => this.props.onOpen();
         this.closeEdit = (ev) => this.props.onClose();
         this.editWallet = (address, name) => (ev) => {
+            if (!address) {
+                address = this.props.wallet.address;
+            };
+            if (!name) {
+                name = this.props.wallet.name;
+            };
             this.props.onClose();
             this.props.onEdit(address, name);
         };
@@ -64,7 +70,7 @@ class AssetEdit extends React.Component {
         return (
             <div>
                 <Dialog
-                title="Dialog With Actions"
+                title="Edit"
                 actions={actions}
                 modal={true}
                 open={open}
