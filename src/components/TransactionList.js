@@ -24,7 +24,7 @@ class TransactionList extends React.Component {
     render() {
         let txList = "No transactions made.";
         if (this.props.history) {
-            txList = this.props.history.map((tx, index) => <li key={index}><Transaction data={tx}/></li>);
+            txList = this.props.history.map((tx, index) => <li key={index}><Transaction data={tx} /></li>);
         };
         return (
             <ul>
