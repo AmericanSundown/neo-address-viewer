@@ -35,6 +35,7 @@ const promiseMiddleware = store => next => action => {
 const localStorageMiddleware = store => next => action => {
     if (action.type === ADD_WALLET || action.type === EDIT_WALLET) {
         if (!action.error) {
+            action.payload.name = action.name;
             window.localStorage.setItem('wallet', JSON.stringify(action.payload));
         }
     } else if (action.type === REMOVE_WALLET) {

@@ -84,8 +84,8 @@ export default (state = defaultState, action) => {
                 ...state,
                 wallet: {
                     ...state.wallet,
-                    address: action.payload.address,
-                    name: action.payload.name,
+                    address: action.address,
+                    name: action.name,
                     assets: {
                         neo: action.payload.asset[0],
                         gas: action.payload.asset[1]

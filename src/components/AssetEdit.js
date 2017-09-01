@@ -71,14 +71,14 @@ class AssetEdit extends React.Component {
                 >
                     <TextField
                         style={style}
-                        hintText={this.props.address}
+                        hintText={this.props.wallet.address}
                         floatingLabelText="type wallet address"
                         floatingLabelFixed={true}
                         onChange={this.changeAddress}
                     />
                     <TextField
                         style={style}
-                        hintText={this.props.name}
+                        hintText={this.props.wallet.name}
                         floatingLabelText="type wallet name"
                         floatingLabelFixed={true}
                         onChange={this.changeName}
