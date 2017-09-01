@@ -26,6 +26,8 @@ const Wallet = {
         requests.get(`/address/get_unspent/${address}`),
     history: address =>
         requests.get(`/address/history/${address}`),
+    transaction: txid =>
+        requests.get(`/transaction/${txid}`),
     currentHeight: () =>
         requests.get('/block/get_current_height')
 }

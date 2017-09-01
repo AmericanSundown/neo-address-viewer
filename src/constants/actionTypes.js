@@ -12,3 +12,4 @@ export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const OPEN_EDIT = 'OPEN_EDIT';
 export const CLOSE_EDIT = 'CLOSE_EDIT';
 export const GET_TRANSACTION = 'GET_TRANSACTION';
+export const GET_HISTORY = 'GET_HISTORY';

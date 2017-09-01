@@ -10,7 +10,8 @@ import {
     LOOKUP_ADDRESS,
     OPEN_EDIT,
     CLOSE_EDIT,
-    GET_TRANSACTION
+    GET_TRANSACTION,
+    GET_HISTORY
 } from './constants/actionTypes'
 import { ADD_PAGE, LIST_PAGE } from './constants/pages';
 
@@ -135,12 +136,23 @@ export default (state = defaultState, action) => {
                     }
                 }
             };
+        case GET_HISTORY:
+            return {
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    history: action.payload.history
+                }
+            };
         case GET_TRANSACTION:
             return {
                 ...state,
                 wallet: {
                     ...state.wallet,
-                    list: action.payload.history
+                    transaction: {
+                        ...state.wallet.transaction,
+                        [action.txid]: action.payload
+                    }
                 }
             };
         default:

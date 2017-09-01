@@ -3,34 +3,28 @@ import { connect } from 'react-redux';
 import { GET_TRANSACTION } from '../constants/actionTypes';
 import agent from '../agent';
 
-const mapStateToProps = state => ({ ...state.wallet });
-
 const mapDispatchToProps = dispatch => ({
-    onLoad: (address) => {
-        const payload = agent.Wallet.history(address);
-        dispatch({ type: GET_TRANSACTION, payload });
+    onLoad: (txid) => {
+        const payload = agent.Wallet.transaction(txid);
+        dispatch({ type: GET_TRANSACTION, payload, txid});
     }
-});
+})
 
 class Transaction extends React.Component {
     constructor() {
         super();
-        this.loadTransactions = (address) => this.props.onLoad(address);
+        this.loadTransaction = (txid) => this.props.onLoad(txid);
     }
     componentWillMount() {
-        this.loadTransactions(this.props.address);
+        this.loadTransaction(this.props.data.txid);
     }
     render() {
-        let txList = "No transactions made.";
-        if (this.props.list) {
-            txList = this.props.list.map((tx, index) => <li key={index}>{tx.txid}</li>);
-        };
-        return (
-            <ul>
-                {txList}
-            </ul>
+        return(
+            <div>
+            {this.props.data.txid}
+            </div>
         );
     }
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Transaction);
+export default connect(null, mapDispatchToProps)(Transaction);

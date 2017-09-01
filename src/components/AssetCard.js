@@ -4,7 +4,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { OPEN_EDIT, REMOVE_WALLET } from '../constants/actionTypes'
 import AssetEdit from './AssetEdit';
-import Transaction from './Transaction';
+import TransactionList from './TransactionList';
 
 const mapDispatchToProps = dispatch => ({
     onOpenEdit: () =>
@@ -36,7 +36,7 @@ class AssetCard extends React.Component {
                     </CardActions>
                     <CardText expandable={true}>
                         <p>Address: {this.props.address}</p>
-                        <Transaction />
+                        <TransactionList />
                     </CardText>
                 </Card>
             </div>
