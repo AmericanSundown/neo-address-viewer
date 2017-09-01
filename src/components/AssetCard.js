@@ -4,6 +4,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { OPEN_EDIT, REMOVE_WALLET } from '../constants/actionTypes'
 import AssetEdit from './AssetEdit';
+import Transaction from './Transaction';
 
 const mapDispatchToProps = dispatch => ({
     onOpenEdit: () =>
@@ -35,10 +36,7 @@ class AssetCard extends React.Component {
                     </CardActions>
                     <CardText expandable={true}>
                         <p>Address: {this.props.address}</p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                        Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                        Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+                        <Transaction />
                     </CardText>
                 </Card>
             </div>

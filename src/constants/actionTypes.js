@@ -11,3 +11,4 @@ export const SET_NAVIGATION_OPEN = 'SET_NAVIGATION_OPEN';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const OPEN_EDIT = 'OPEN_EDIT';
 export const CLOSE_EDIT = 'CLOSE_EDIT';
+export const GET_TRANSACTION = 'GET_TRANSACTION';

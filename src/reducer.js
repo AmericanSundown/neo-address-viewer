@@ -9,7 +9,8 @@ import {
     EDIT_WALLET,
     LOOKUP_ADDRESS,
     OPEN_EDIT,
-    CLOSE_EDIT
+    CLOSE_EDIT,
+    GET_TRANSACTION
 } from './constants/actionTypes'
 import { ADD_PAGE, LIST_PAGE } from './constants/pages';
 
@@ -36,8 +37,8 @@ export default (state = defaultState, action) => {
                 wallet: {
                     ...state.wallet,
                     assets: {
-                        neo: action.payload.asset[0],
-                        gas: action.payload.asset[1]
+                        neo: action.payload.NEO,
+                        gas: action.payload.GAS
                     }
                 }
             };
@@ -87,8 +88,8 @@ export default (state = defaultState, action) => {
                     address: action.address,
                     name: action.name,
                     assets: {
-                        neo: action.payload.asset[0],
-                        gas: action.payload.asset[1]
+                        neo: action.payload.NEO,
+                        gas: action.payload.GAS
                     }
                 }
             };
@@ -129,9 +130,17 @@ export default (state = defaultState, action) => {
                     address: action.address,
                     name: action.name,
                     assets: {
-                        neo: action.payload.asset[0],
-                        gas: action.payload.asset[1]
+                        neo: action.payload.NEO,
+                        gas: action.payload.GAS
                     }
+                }
+            };
+        case GET_TRANSACTION:
+            return {
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    list: action.payload.history
                 }
             };
         default:

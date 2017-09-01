@@ -3,7 +3,8 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'http://antchain.org/api/v1';
+// const API_ROOT = 'http://antchain.org/api/v1';
+const API_ROOT = 'http://api.neonwallet.com/v1';
 
 const responseBody = res => res.body;
 
@@ -20,7 +21,11 @@ const requests = {
 
 const Wallet = {
     lookup: address =>
-        requests.get('/address/get_value/' + address), // UGLY!
+        requests.get(`/address/balance/${address}`),
+    unspent: address =>
+        requests.get(`/address/get_unspent/${address}`),
+    history: address =>
+        requests.get(`/address/history/${address}`),
     currentHeight: () =>
         requests.get('/block/get_current_height')
 }

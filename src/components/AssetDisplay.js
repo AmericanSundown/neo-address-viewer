@@ -31,8 +31,8 @@ class AssetDisplay extends React.Component {
     render() {
         const noneValue = "TBA";
         const wallet = this.props.wallet;
-        const neoValue = wallet.assets.neo ? wallet.assets.neo.value : noneValue;
-        const gasValue = wallet.assets.gas ? wallet.assets.gas.value : noneValue;
+        const neoValue = wallet.assets.neo ? wallet.assets.neo.balance : noneValue;
+        const gasValue = wallet.assets.gas ? wallet.assets.gas.balance : noneValue;
         const walletName = wallet.name ? wallet.name : noneValue;
         const walletAddress = wallet.address ? wallet.address : noneValue;
         return (
