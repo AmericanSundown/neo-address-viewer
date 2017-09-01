@@ -52,8 +52,8 @@ class AssetEdit extends React.Component {
         this.changeName = ev => this.props.onChangeName(ev.target.value);
     }
     render() {
-        const address = this.props.address;
-        const name = this.props.name;
+        const address = this.props.common.address;
+        const name = this.props.common.name;
         const open = this.props.navigation.edit.open ? this.props.navigation.edit.open : false;
         const actions = [
             <FlatButton

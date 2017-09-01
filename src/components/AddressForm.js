@@ -45,8 +45,8 @@ class AddressForm extends Component {
     }
 
     render() {
-        const address = this.props.address;
-        const name = this.props.name;
+        const address = this.props.common.address;
+        const name = this.props.common.name;
         return (
             <div style={styles.wrapper}>
                 <TextField
