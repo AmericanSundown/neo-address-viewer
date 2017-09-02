@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
 import { GET_HISTORY } from '../constants/actionTypes';
 import agent from '../agent';
 import Transaction from './Transaction';
@@ -17,18 +19,20 @@ class TransactionList extends React.Component {
         this.loadTransactions = (address) => this.props.onLoad(address);
     }
     componentWillMount() {
-        console.log('address:', this.props.address);
         this.loadTransactions(this.props.address);
     }
     render() {
         let txList = "No transactions made.";
         if (this.props.history) {
-            txList = this.props.history.map((tx, index) => <li key={index}><Transaction data={tx} /></li>);
+            txList = this.props.history.map((tx, index) => (
+                <ListItem key={index}>
+                    <Transaction data={tx} />
+                </ListItem>));
         };
         return (
-            <ul>
+            <List>
                 {txList}
-            </ul>
+            </List>
         );
     }
 };

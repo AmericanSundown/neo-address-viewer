@@ -5,6 +5,18 @@ import Divider from 'material-ui/Divider';
 import { GET_TRANSACTION } from '../constants/actionTypes';
 import agent from '../agent';
 
+const styles = {
+    received: {
+        color: "green"
+    },
+    sent: {
+        color: "red"
+    },
+    default: {
+        color: "black"
+    }
+};
+
 const mapDispatchToProps = dispatch => ({
     onLoad: (txid) => {
         const payload = agent.Wallet.transaction(txid);
@@ -21,16 +33,25 @@ class Transaction extends React.Component {
         // Don't need the detail for now.
         // this.loadTransaction(this.props.data.txid);
     }
+    highlightAsset(asset) {
+        let highlight = 'default';
+        if (asset < 0) {
+            highlight = 'sent';
+        };
+        if (asset > 0) {
+            highlight = 'received';
+        };
+        return (<span style={styles[highlight]}>{asset}</span>);
+    }
     render() {
-        return(
-            <div>
-            {this.props.data.txid}
-            <Divider />
-            BLOCK: {this.props.data.block_index}<br/>
-            NEO: {this.props.data.NEO}<br/>
-            GAS:{this.props.data.GAS}<br/>
-            </div>
-        );
+        const data = this.props.data;
+        const content = (<div>
+            {data.txid}<br/>
+            BLOCK: {data.block_index}<br/>
+            NEO: {this.highlightAsset(data.NEO)}<br/>
+            GAS: {this.highlightAsset(data.GAS)}<br/>
+        </div>);
+        return (content);
     }
 }
 
