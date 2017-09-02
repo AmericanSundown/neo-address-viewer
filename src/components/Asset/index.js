@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
-import AssetCard from './AssetCard';
-import { REMOVE_WALLET, LOAD_WALLETS, LOOKUP_ADDRESS } from '../constants/actionTypes';
-import agent from '../agent';
+import Detail from './Detail';
+import { REMOVE_WALLET, LOAD_WALLETS, LOOKUP_ADDRESS } from '../../constants/actionTypes';
+import agent from '../../agent';
 
 const mapStateToProps = state => ({ ...state.wallet });
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-class AssetDisplay extends React.Component {
+class Asset extends React.Component {
     constructor() {
         super();
         this.loadWallets = (addresses, wallets) => this.props.onWalletsLoad(addresses, wallets);
@@ -45,7 +45,7 @@ class AssetDisplay extends React.Component {
     render() {
         const walletListItems = this.props.addresses.map((address, index) => (
             <ListItem key={index} disabled={true}>
-                <AssetCard
+                <Detail
                     data={this.props.wallets[address]}
                     onRemove={this.removeWallet(address)}
                 />
@@ -63,4 +63,4 @@ class AssetDisplay extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(Asset);

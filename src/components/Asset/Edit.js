@@ -9,8 +9,8 @@ import {
     EDIT_WALLET,
     OPEN_EDIT,
     UPDATE_FIELD_ADDRESS
-} from '../constants/actionTypes'
-import agent from '../agent';
+} from '../../constants/actionTypes'
+import agent from '../../agent';
 
 const style = {
     display: "block"
@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'name', value })
 });
 
-class AssetEdit extends React.Component {
+class Edit extends React.Component {
     constructor() {
         super();
         this.openEdit = (ev) => this.props.onOpen();
@@ -105,4 +105,4 @@ class AssetEdit extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(Edit);

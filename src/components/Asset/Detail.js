@@ -2,16 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import { OPEN_EDIT } from '../constants/actionTypes'
-import AssetEdit from './AssetEdit';
-import TransactionList from './TransactionList';
+import { OPEN_EDIT } from '../../constants/actionTypes'
+import Edit from './Edit';
+import TransactionList from '../TransactionList';
 
 const mapDispatchToProps = dispatch => ({
     onOpenEdit: () =>
         dispatch({ type: OPEN_EDIT })
 });
 
-class AssetCard extends React.Component {
+class Detail extends React.Component {
     constructor() {
         super();
         this.openEdit = (ev) => this.props.onOpenEdit();
@@ -24,7 +24,7 @@ class AssetCard extends React.Component {
         const gas = this.props.data.assets ? this.props.data.assets.gas.balance : noneValue;
         return (
             <div>
-                <AssetEdit
+                <Edit
                     defaultAddress={this.props.data.address}
                     defaultName={this.props.data.name}
                 />
@@ -49,4 +49,4 @@ class AssetCard extends React.Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AssetCard);
+export default connect(null, mapDispatchToProps)(Detail);

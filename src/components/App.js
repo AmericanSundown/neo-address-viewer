@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import AddressForm from './AddressForm';
-import AssetDisplay from './AssetDisplay';
+import Asset from './Asset';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { ADD_PAGE, LIST_PAGE } from '../constants/pages';
@@ -18,13 +18,13 @@ const mapStateToProps = state => ({ ...state });
 
 class App extends Component {
   render() {
-    const assetDisplay = displayPage(this.props.navigation.currentPage, LIST_PAGE) ? <AssetDisplay /> : null;
+    const asset = displayPage(this.props.navigation.currentPage, LIST_PAGE) ? <Asset /> : null;
     const addressForm = displayPage(this.props.navigation.currentPage, ADD_PAGE) ? <AddressForm /> : null;
     return (
       <div className="App1">
         <Header />
         <div style={style}>
-          {assetDisplay}
+          {asset}
           {addressForm}
         </div>
       </div>
