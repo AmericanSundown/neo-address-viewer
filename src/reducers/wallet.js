@@ -1,75 +1,98 @@
 import {
-    ADDRESS_LOOKUP,
     ADD_WALLET,
     REMOVE_WALLET,
     EDIT_WALLET,
+    LOAD_WALLETS,
     LOOKUP_ADDRESS,
     GET_TRANSACTION,
     GET_HISTORY
 } from '../constants/actionTypes'
 
 const defaultState = {
-    name: "",
-    address: "",
-    assets: {}
+    addresses: [],
+    wallets: {}
 };
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case ADDRESS_LOOKUP:
-            return {
-                ...state,
-                assets: {
-                    neo: action.payload.NEO,
-                    gas: action.payload.GAS
-                }
-            };
         case ADD_WALLET:
             return {
                 ...state,
-                name: action.payload.name,
-                address: action.payload.address
+                addresses: action.addresses,
+                wallets: {
+                    ...state.wallets,
+                    [action.address]: {
+                        name: action.name
+                    }
+                }
             };
         case EDIT_WALLET:
             return {
                 ...state,
-                address: action.address,
-                name: action.name,
-                assets: {
-                    neo: action.payload.NEO,
-                    gas: action.payload.GAS
+                addresses: action.addresses,
+                wallets: {
+                    ...state.wallets,
+                    [action.address]: {
+                        ...state[action.address],
+                        address: action.address,
+                        name: action.name,
+                        assets: {
+                            neo: action.payload.NEO,
+                            gas: action.payload.GAS
+                        }
+                    }
                 }
             };
         case REMOVE_WALLET:
             return {
                 ...state,
-                name: "",
-                address: "",
-                assets: {}
+                addresses: action.addresses,
+                wallets: {
+                    ...state.wallets,
+                    [action.address]: {}
+                }
             };
         case LOOKUP_ADDRESS:
             return {
                 ...state,
-                address: action.address,
-                name: action.name,
-                assets: {
-                    neo: action.payload.NEO,
-                    gas: action.payload.GAS
+                wallets: {
+                    ...state.wallets,
+                    [action.address]: {
+                        ...state[action.address],
+                        address: action.address,
+                        name: action.name,
+                        assets: {
+                            neo: action.payload.NEO,
+                            gas: action.payload.GAS
+                        }
+                    }
                 }
             };
         case GET_HISTORY:
             return {
                 ...state,
-                history: action.payload.history
+                [action.key]: {
+                    ...state[action.key],
+                    history: action.payload.history
+                }
             };
         case GET_TRANSACTION:
             return {
                 ...state,
-                transaction: {
-                    ...state.wallet.transaction,
-                    [action.txid]: action.payload
+                [action.key]: {
+                    ...state[action.key],
+                    transaction: {
+                        ...state[action.key].transaction,
+                        [action.txid]: action.payload
+                    }
                 }
-            };
+            }
+        case LOAD_WALLETS:
+            return {
+                ...state,
+                addresses: action.addresses,
+                wallets: action.wallets
+            }
         default:
             return state;        
     }

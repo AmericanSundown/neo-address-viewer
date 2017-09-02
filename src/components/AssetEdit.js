@@ -23,9 +23,9 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: OPEN_EDIT }),
     onClose: () =>
         dispatch({ type: CLOSE_EDIT }),
-    onEdit: (address, name) => {
+    onEdit: (addresses, address, name) => {
         const payload = agent.Wallet.lookup(address);
-        dispatch({ type: EDIT_WALLET, payload, address, name });
+        dispatch({ type: EDIT_WALLET, payload, addresses, address, name });
     },
     onChangeAddress: (value) =>
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'address', value }),
@@ -40,13 +40,23 @@ class AssetEdit extends React.Component {
         this.closeEdit = (ev) => this.props.onClose();
         this.editWallet = (address, name) => (ev) => {
             if (!address) {
-                address = this.props.wallet.address;
+                address = this.props.defaultAddress;
             };
             if (!name) {
-                name = this.props.wallet.name;
+                name = this.props.defaultName;
+            };
+            // Need to exclude this current if different.
+            const index = this.props.wallet.addresses.indexOf(this.props.defaultAddress);
+            let addresses = [...this.props.wallet.addresses];
+            if (index > -1) {
+                addresses = [
+                    ...this.props.wallet.addresses.splice(0, index),
+                    ...this.props.wallet.addresses.splice(index + 1),
+                    address
+                ];
             };
             this.props.onClose();
-            this.props.onEdit(address, name);
+            this.props.onEdit(addresses, address, name);
         };
         this.changeAddress = ev => this.props.onChangeAddress(ev.target.value);
         this.changeName = ev => this.props.onChangeName(ev.target.value);
@@ -77,14 +87,14 @@ class AssetEdit extends React.Component {
                 >
                     <TextField
                         style={style}
-                        hintText={this.props.wallet.address}
+                        hintText={this.props.defaultAddress}
                         floatingLabelText="type wallet address"
                         floatingLabelFixed={true}
                         onChange={this.changeAddress}
                     />
                     <TextField
                         style={style}
-                        hintText={this.props.wallet.name}
+                        hintText={this.props.defaultName}
                         floatingLabelText="type wallet name"
                         floatingLabelFixed={true}
                         onChange={this.changeName}

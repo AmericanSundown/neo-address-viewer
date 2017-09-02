@@ -35,11 +35,12 @@ const promiseMiddleware = store => next => action => {
 const localStorageMiddleware = store => next => action => {
     if (action.type === ADD_WALLET || action.type === EDIT_WALLET) {
         if (!action.error) {
-            action.payload.name = action.name;
-            window.localStorage.setItem('wallet', JSON.stringify(action.payload));
+            window.localStorage.setItem('addresses', JSON.stringify(action.addresses));
+            window.localStorage.setItem('wallets', JSON.stringify(action.wallets));
         }
     } else if (action.type === REMOVE_WALLET) {
-        window.localStorage.removeItem('wallet');
+        window.localStorage.removeItem('addresses');
+        window.localStorage.removeItem('wallets');
     }
   
     next(action);

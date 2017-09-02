@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import { ADD_WALLET, ADDRESS_LOOKUP, UPDATE_FIELD_ADDRESS } from '../constants/actionTypes';
+import { ADD_WALLET, UPDATE_FIELD_ADDRESS } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
-        dispatch({ type: ADDRESS_LOOKUP, payload }),
     onChangeAddress: (value) =>
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'address', value }),
     onChangeName: (value) =>
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'name', value }),
-    onAddWallet: (address, name) => {
-        const payload = { address, name };
-        dispatch({ type: ADD_WALLET, payload })
-    }
+    onAddWallet: (addresses, address, name, wallets) =>
+        dispatch({ type: ADD_WALLET, addresses, address, name, wallets })
 })
 
 const styles = {
@@ -40,10 +36,17 @@ class AddressForm extends Component {
         this.changeName = ev => this.props.onChangeName(ev.target.value);
         this.addWallet = (address, name) => ev => {
             ev.preventDefault();
-            this.props.onAddWallet(address, name);
+            const wallets = {
+                ...this.props.wallets,
+                [address]: { name }
+            };
+            let addresses = [...this.props.wallet.addresses];
+            if (!addresses.includes(address)) {
+                addresses = [...this.props.wallet.addresses, address];
+            }
+            this.props.onAddWallet(addresses, address, name, wallets);
         };
     }
-
     render() {
         const address = this.props.common.address;
         const name = this.props.common.name;

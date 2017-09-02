@@ -3,53 +3,61 @@ import { connect } from 'react-redux';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import AssetCard from './AssetCard';
-import { LOOKUP_ADDRESS } from '../constants/actionTypes';
+import { REMOVE_WALLET, LOAD_WALLETS, LOOKUP_ADDRESS } from '../constants/actionTypes';
 import agent from '../agent';
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({ ...state.wallet });
 
 const mapDispatchToProps = dispatch => ({
     onLoad: (address, name) => {
         if (address) {
             const payload = agent.Wallet.lookup(address);
             dispatch({ type: LOOKUP_ADDRESS, payload, address, name });
-        }
-    }
+        };
+    },
+    onWalletsLoad: (addresses, wallets) => 
+        dispatch({ type: LOAD_WALLETS, addresses, wallets }),
+    onRemove: (addresses, address) =>
+        dispatch({ type: REMOVE_WALLET, addresses, address })
+
 })
 
 class AssetDisplay extends React.Component {
     constructor() {
         super();
+        this.loadWallets = (addresses, wallets) => this.props.onWalletsLoad(addresses, wallets);
+        this.removeWallet = (address) => (ev) => {
+            const index = this.props.addresses.indexOf(address);
+            const addresses = [...this.props.addresses.slice(0, index), ...this.props.addresses.slice(index + 1)];
+            this.props.onRemove(addresses, address);
+        };
     }
     componentWillMount() {
-        let wallet = this.props.wallet;
-        if (window.localStorage.key('wallet')) {
-            wallet = JSON.parse(window.localStorage.getItem('wallet'));
+        let addresses = this.props.addresses;
+        let wallets = this.props.wallets;
+        if (window.localStorage.getItem('addresses')) {
+            addresses = JSON.parse(window.localStorage.getItem('addresses'));
+            wallets = JSON.parse(window.localStorage.getItem('wallets'));
         }
-        this.props.onLoad(wallet.address, wallet.name);
+        this.loadWallets(addresses, wallets);
+        addresses.map((address) => this.props.onLoad(address, wallets[address].name));
     }
     render() {
-        const noneValue = "TBA";
-        const wallet = this.props.wallet;
-        const neoValue = wallet.assets.neo ? wallet.assets.neo.balance : noneValue;
-        const gasValue = wallet.assets.gas ? wallet.assets.gas.balance : noneValue;
-        const walletName = wallet.name ? wallet.name : noneValue;
-        const walletAddress = wallet.address ? wallet.address : noneValue;
+        const walletListItems = this.props.addresses.map((address, index) => (
+            <ListItem key={index} disabled={true}>
+                <AssetCard
+                    data={this.props.wallets[address]}
+                    onRemove={this.removeWallet(address)}
+                />
+            </ListItem>
+        ));
+        let walletList = "No wallet has been added yet.";
+        if (this.props.addresses.length) {
+            walletList = <List>{walletListItems}</List>
+        }
         return (
             <div>
-                <List>
-                    <ListItem
-                        disabled={true}
-                    >
-                        <AssetCard
-                            name={walletName}
-                            address={walletAddress}
-                            neo={neoValue}
-                            gas={gasValue}
-                            key={0}
-                        />
-                    </ListItem>
-                </List>
+                {walletList}
             </div>
         ); 
     }

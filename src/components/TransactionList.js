@@ -4,8 +4,6 @@ import { GET_HISTORY } from '../constants/actionTypes';
 import agent from '../agent';
 import Transaction from './Transaction';
 
-const mapStateToProps = state => ({ ...state.wallet });
-
 const mapDispatchToProps = dispatch => ({
     onLoad: (address) => {
         const payload = agent.Wallet.history(address);
@@ -34,4 +32,4 @@ class TransactionList extends React.Component {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionList);
+export default connect(null, mapDispatchToProps)(TransactionList);
