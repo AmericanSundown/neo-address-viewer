@@ -71,19 +71,25 @@ export default (state = defaultState, action) => {
         case GET_HISTORY:
             return {
                 ...state,
-                [action.key]: {
-                    ...state[action.key],
-                    history: action.payload.history
+                wallets: {
+                    ...state.wallets,
+                    [action.address]: {
+                        ...state.wallets[action.address],
+                        history: action.payload.history
+                    }
                 }
             };
         case GET_TRANSACTION:
             return {
                 ...state,
-                [action.key]: {
-                    ...state[action.key],
-                    transaction: {
-                        ...state[action.key].transaction,
-                        [action.txid]: action.payload
+                wallets: {
+                    ...state.wallets,
+                    [action.address]: {
+                        ...state.wallets[action.address],
+                        transaction: {
+                            ...state[action.address].transaction,
+                            [action.txid]: action.payload
+                        }
                     }
                 }
             }

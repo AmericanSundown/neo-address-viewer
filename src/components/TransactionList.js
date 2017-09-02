@@ -7,7 +7,7 @@ import Transaction from './Transaction';
 const mapDispatchToProps = dispatch => ({
     onLoad: (address) => {
         const payload = agent.Wallet.history(address);
-        dispatch({ type: GET_HISTORY, payload });
+        dispatch({ type: GET_HISTORY, payload, address });
     }
 });
 
@@ -17,6 +17,7 @@ class TransactionList extends React.Component {
         this.loadTransactions = (address) => this.props.onLoad(address);
     }
     componentWillMount() {
+        console.log('address:', this.props.address);
         this.loadTransactions(this.props.address);
     }
     render() {
