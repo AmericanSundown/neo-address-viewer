@@ -6,6 +6,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { ADD_WALLET, UPDATE_FIELD_ADDRESS, TOGGLE_FORM } from '../constants/actionTypes';
+import agent from '../agent';
 
 const mapStateToProps = state => ({ ...state });
 
@@ -14,8 +15,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'address', value }),
     onChangeName: (value) =>
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'name', value }),
-    onAddWallet: (addresses, address, name, wallets) =>
-        dispatch({ type: ADD_WALLET, addresses, address, name, wallets }),
+    onAddWallet: (addresses, address, name, wallets) => {
+        const payload = agent.Wallet.lookup(address);
+        dispatch({ type: ADD_WALLET, payload, addresses, address, name, wallets })
+    },
     onToggleAddForm: () =>
         dispatch({ type: TOGGLE_FORM, key: 'add' })
 })

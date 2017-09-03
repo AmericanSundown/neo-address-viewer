@@ -22,7 +22,12 @@ export default (state = defaultState, action) => {
                 wallets: {
                     ...state.wallets,
                     [action.address]: {
-                        name: action.name
+                        address: action.address,
+                        name: action.name,
+                        assets: {
+                            neo: action.payload.NEO,
+                            gas: action.payload.GAS
+                        }
                     }
                 }
             };
