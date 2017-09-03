@@ -51,7 +51,7 @@ class Asset extends React.Component {
                 />
             </ListItem>
         ));
-        let walletList = "No wallet has been added yet.";
+        let walletList = 'No wallet has been added yet.';
         if (this.props.addresses.length) {
             walletList = <List>{walletListItems}</List>
         }

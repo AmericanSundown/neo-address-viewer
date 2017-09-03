@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
 
 const styles = {
     "wrapper": {
-        width: "33%",
         margin: "0 auto",
         
     },
