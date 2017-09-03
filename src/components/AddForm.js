@@ -28,16 +28,18 @@ class AddForm extends Component {
         this.toggleAddForm = (ev) => this.props.onToggleAddForm();
         this.addWallet = (address, name) => ev => {
             ev.preventDefault();
-            const wallets = {
-                ...this.props.wallets,
-                [address]: { name }
+            if (address) {
+                const wallets = {
+                    ...this.props.wallets,
+                    [address]: { name }
+                };
+                let addresses = [...this.props.wallet.addresses];
+                if (!addresses.includes(address)) {
+                    addresses = [...this.props.wallet.addresses, address];
+                };
+                this.props.onAddWallet(addresses, address, name, wallets);
             };
-            let addresses = [...this.props.wallet.addresses];
-            if (!addresses.includes(address)) {
-                addresses = [...this.props.wallet.addresses, address];
-            }
             this.props.onToggleAddForm();
-            this.props.onAddWallet(addresses, address, name, wallets);
         };
     }
     render() {
