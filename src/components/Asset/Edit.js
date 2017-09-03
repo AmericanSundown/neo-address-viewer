@@ -80,22 +80,22 @@ class Edit extends React.Component {
         return (
             <div>
                 <Dialog
-                title="Edit"
-                actions={actions}
-                modal={true}
-                open={open}
+                    title="Edit Wallet"
+                    actions={actions}
+                    modal={true}
+                    open={open}
                 >
                     <TextField
                         style={style}
                         hintText={this.props.defaultAddress}
-                        floatingLabelText="type wallet address"
+                        floatingLabelText="Public Address"
                         floatingLabelFixed={true}
                         onChange={this.changeAddress}
                     />
                     <TextField
                         style={style}
                         hintText={this.props.defaultName}
-                        floatingLabelText="type wallet name"
+                        floatingLabelText="Name (optional)"
                         floatingLabelFixed={true}
                         onChange={this.changeName}
                     />

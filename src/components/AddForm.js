@@ -45,20 +45,20 @@ class AddForm extends Component {
             <div>
                 <Card>
                     <CardHeader
-                    title={'Add your wallet'}
-                    subtitle={'You are welcome!'}
+                        title="Add an wallet here."
+                        subtitle="Type wallet information below."
                     />
                     <CardText>
                         <TextField
                             hintText=""
-                            floatingLabelText="type wallet name"
-                            onChange={this.changeName}
+                            floatingLabelText="Public Address"
+                            onChange={this.changeAddress}
                         />
                         <br/>
                         <TextField
                             hintText=""
-                            floatingLabelText="type wallet address"
-                            onChange={this.changeAddress}
+                            floatingLabelText="Name (optional)"
+                            onChange={this.changeName}
                         />
                     </CardText>
                     <CardActions>
