@@ -14,6 +14,9 @@ const styles = {
     },
     default: {
         color: "black"
+    },
+    text: {
+        wordBreak: "break-all"
     }
 };
 
@@ -45,7 +48,7 @@ class Transaction extends React.Component {
     }
     render() {
         const data = this.props.data;
-        const content = (<div>
+        const content = (<div style={styles.text}>
             {data.txid}<br/>
             BLOCK: {data.block_index}<br/>
             NEO: {this.highlightAsset(data.NEO)}<br/>

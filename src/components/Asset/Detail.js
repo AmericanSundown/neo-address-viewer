@@ -6,6 +6,12 @@ import { TOGGLE_FORM } from '../../constants/actionTypes'
 import Edit from './Edit';
 import TransactionList from '../TransactionList';
 
+const styles = {
+    text: {
+        wordBreak: "break-all"
+    }
+};
+
 const mapDispatchToProps = dispatch => ({
     onToggleEdit: () =>
         dispatch({ type: TOGGLE_FORM, key: 'edit' })
@@ -31,7 +37,9 @@ class Detail extends React.Component {
                 <Card>
                     <CardHeader
                         title={`${name}`}
+                        titleStyle={styles.text}
                         subtitle={`NEO: ${neo} | GAS: ${gas}`}
+                        subtitleStyle={styles.text}
                         actAsExpander={true}
                         showExpandableButton={true}
                     />
