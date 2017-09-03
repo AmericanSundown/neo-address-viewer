@@ -36,6 +36,7 @@ class AddForm extends Component {
             if (!addresses.includes(address)) {
                 addresses = [...this.props.wallet.addresses, address];
             }
+            this.props.onToggleAddForm();
             this.props.onAddWallet(addresses, address, name, wallets);
         };
     }

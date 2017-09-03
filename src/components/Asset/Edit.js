@@ -36,6 +36,7 @@ class Edit extends React.Component {
         super();
         this.toggleEdit = (ev) => this.props.onToggleEdit();
         this.editWallet = (address, name) => (ev) => {
+            ev.preventDefault();
             if (!address) {
                 address = this.props.defaultAddress;
             };
@@ -52,7 +53,7 @@ class Edit extends React.Component {
                     address
                 ];
             };
-            this.props.onClose();
+            this.props.onToggleEdit();
             this.props.onEdit(addresses, address, name);
         };
         this.changeAddress = ev => this.props.onChangeAddress(ev.target.value);
