@@ -5,13 +5,13 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import { TOGGLE_ADD_FORM } from '../constants/actionTypes';
+import { TOGGLE_FORM } from '../constants/actionTypes';
 
-const mapStateToProps = state => ({ ...state.navigation });
+const mapStateToProps = state => ({ ...state.popup });
 
 const mapDispatchToProps = dispatch => ({
     onToggleAddForm: () =>
-        dispatch({ type: TOGGLE_ADD_FORM })
+        dispatch({ type: TOGGLE_FORM, key: 'add' })
 })
 
 class Header extends React.Component {

@@ -15,12 +15,11 @@ const mapStateToProps = state => ({ ...state });
 
 class App extends Component {
   render() {
-    const addForm = this.props.navigation.showAddForm ? <AddForm /> : null;
     return (
       <div className="App">
         <Header />
         <div style={style}>
-          {addForm}
+          <AddForm />
           <Asset />
         </div>
       </div>

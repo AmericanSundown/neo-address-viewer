@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
-import { ADD_WALLET, UPDATE_FIELD_ADDRESS, TOGGLE_ADD_FORM } from '../constants/actionTypes';
+import { ADD_WALLET, UPDATE_FIELD_ADDRESS, TOGGLE_FORM } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state });
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
     onAddWallet: (addresses, address, name, wallets) =>
         dispatch({ type: ADD_WALLET, addresses, address, name, wallets }),
     onToggleAddForm: () =>
-        dispatch({ type: TOGGLE_ADD_FORM })
+        dispatch({ type: TOGGLE_FORM, key: 'add' })
 })
 
 class AddForm extends Component {
@@ -42,7 +42,7 @@ class AddForm extends Component {
     render() {
         const address = this.props.common.address;
         const name = this.props.common.name;
-        const open = this.props.navigation.showAddForm;
+        const open = this.props.popup.add;
         const actions = [
             <FlatButton
               label="Add"

@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import { TOGGLE_EDIT_FORM } from '../../constants/actionTypes'
+import { TOGGLE_FORM } from '../../constants/actionTypes'
 import Edit from './Edit';
 import TransactionList from '../TransactionList';
 
 const mapDispatchToProps = dispatch => ({
     onToggleEdit: () =>
-        dispatch({ type: TOGGLE_EDIT_FORM })
+        dispatch({ type: TOGGLE_FORM, key: 'edit' })
 });
 
 class Detail extends React.Component {

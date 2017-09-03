@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import {
     EDIT_WALLET,
+    TOGGLE_FORM,
     TOGGLE_EDIT_FORM,
     UPDATE_FIELD_ADDRESS
 } from '../../constants/actionTypes'
@@ -19,7 +20,7 @@ const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
     onToggleEdit: () =>
-        dispatch({ type: TOGGLE_EDIT_FORM }),
+        dispatch({ type: TOGGLE_FORM, key: 'edit' }),
     onEdit: (addresses, address, name) => {
         const payload = agent.Wallet.lookup(address);
         dispatch({ type: EDIT_WALLET, payload, addresses, address, name });
@@ -60,7 +61,7 @@ class Edit extends React.Component {
     render() {
         const address = this.props.common.address;
         const name = this.props.common.name;
-        const open = this.props.navigation.showEditForm;
+        const open = this.props.popup.edit;
         const actions = [
             <FlatButton
               label="Submit"
