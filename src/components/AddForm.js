@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { ADD_WALLET, UPDATE_FIELD_ADDRESS, TOGGLE_ADD_FORM } from '../constants/actionTypes';
 
@@ -16,19 +18,6 @@ const mapDispatchToProps = dispatch => ({
     onToggleAddForm: () =>
         dispatch({ type: TOGGLE_ADD_FORM })
 })
-
-const styles = {
-    "wrapper": {
-        margin: "0 auto",
-        
-    },
-    "inputField": {
-        display: "block",
-    },
-    "button": {
-        margin: 12,
-    }
-  };
 
 class AddForm extends Component {
     constructor() {
@@ -53,31 +42,30 @@ class AddForm extends Component {
         const address = this.props.common.address;
         const name = this.props.common.name;
         return (
-            <div style={styles.wrapper}>
-                <TextField
-                    style={styles.inputField}
-                    hintText=""
-                    floatingLabelText="type wallet name"
-                    onChange={this.changeName}
-                />
-                <TextField
-                    style={styles.inputField}
-                    hintText=""
-                    floatingLabelText="type wallet address"
-                    onChange={this.changeAddress}
-                />
-                <RaisedButton
-                    label="Add"
-                    primary={true}
-                    style={styles.button}
-                    onClick={this.addWallet(address, name)}
-                />
-                <RaisedButton
-                    label="Cancel"
-                    primary={false}
-                    style={styles.button}
-                    onClick={this.toggleAddForm}
-                />
+            <div>
+                <Card>
+                    <CardHeader
+                    title={'Add your wallet'}
+                    subtitle={'You are welcome!'}
+                    />
+                    <CardText>
+                        <TextField
+                            hintText=""
+                            floatingLabelText="type wallet name"
+                            onChange={this.changeName}
+                        />
+                        <br/>
+                        <TextField
+                            hintText=""
+                            floatingLabelText="type wallet address"
+                            onChange={this.changeAddress}
+                        />
+                    </CardText>
+                    <CardActions>
+                        <FlatButton primary={true} label="Add" onClick={this.addWallet(address, name)}/>
+                        <FlatButton secondary={true} label="Cancel" onClick={this.toggleAddForm}/>
+                    </CardActions>
+                </Card>
             </div>
         );
     }
