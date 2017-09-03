@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import { ADD_WALLET, UPDATE_FIELD_ADDRESS } from '../constants/actionTypes';
+import { ADD_WALLET, UPDATE_FIELD_ADDRESS, TOGGLE_ADD_FORM } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state });
 
@@ -12,7 +12,9 @@ const mapDispatchToProps = dispatch => ({
     onChangeName: (value) =>
         dispatch({ type: UPDATE_FIELD_ADDRESS, key: 'name', value }),
     onAddWallet: (addresses, address, name, wallets) =>
-        dispatch({ type: ADD_WALLET, addresses, address, name, wallets })
+        dispatch({ type: ADD_WALLET, addresses, address, name, wallets }),
+    onToggleAddForm: () =>
+        dispatch({ type: TOGGLE_ADD_FORM })
 })
 
 const styles = {
@@ -28,11 +30,12 @@ const styles = {
     }
   };
 
-class AddressForm extends Component {
+class AddForm extends Component {
     constructor() {
         super();
         this.changeAddress = ev => this.props.onChangeAddress(ev.target.value);
         this.changeName = ev => this.props.onChangeName(ev.target.value);
+        this.toggleAddForm = (ev) => this.props.onToggleAddForm();
         this.addWallet = (address, name) => ev => {
             ev.preventDefault();
             const wallets = {
@@ -69,9 +72,15 @@ class AddressForm extends Component {
                     style={styles.button}
                     onClick={this.addWallet(address, name)}
                 />
+                <RaisedButton
+                    label="Cancel"
+                    primary={false}
+                    style={styles.button}
+                    onClick={this.toggleAddForm}
+                />
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddressForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
