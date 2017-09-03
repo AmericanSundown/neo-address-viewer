@@ -5,9 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import {
-    CLOSE_EDIT,
     EDIT_WALLET,
-    OPEN_EDIT,
+    TOGGLE_EDIT_FORM,
     UPDATE_FIELD_ADDRESS
 } from '../../constants/actionTypes'
 import agent from '../../agent';
@@ -19,10 +18,8 @@ const style = {
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    onOpen: () =>
-        dispatch({ type: OPEN_EDIT }),
-    onClose: () =>
-        dispatch({ type: CLOSE_EDIT }),
+    onToggleEdit: () =>
+        dispatch({ type: TOGGLE_EDIT_FORM }),
     onEdit: (addresses, address, name) => {
         const payload = agent.Wallet.lookup(address);
         dispatch({ type: EDIT_WALLET, payload, addresses, address, name });
@@ -36,8 +33,7 @@ const mapDispatchToProps = dispatch => ({
 class Edit extends React.Component {
     constructor() {
         super();
-        this.openEdit = (ev) => this.props.onOpen();
-        this.closeEdit = (ev) => this.props.onClose();
+        this.toggleEdit = (ev) => this.props.onToggleEdit();
         this.editWallet = (address, name) => (ev) => {
             if (!address) {
                 address = this.props.defaultAddress;
@@ -64,23 +60,23 @@ class Edit extends React.Component {
     render() {
         const address = this.props.common.address;
         const name = this.props.common.name;
-        const open = this.props.navigation.edit.open ? this.props.navigation.edit.open : false;
+        const open = this.props.navigation.showEditForm;
         const actions = [
-            <FlatButton
-              label="Cancel"
-              primary={true}
-              onClick={this.closeEdit}
-            />,
             <FlatButton
               label="Submit"
               primary={true}
               onClick={this.editWallet(address, name)}
             />,
+            <FlatButton
+              label="Cancel"
+              secondary={true}
+              onClick={this.toggleEdit}
+            />,
         ];
         return (
             <div>
                 <Dialog
-                    title="Edit Wallet"
+                    title="Edit wallet"
                     actions={actions}
                     modal={true}
                     open={open}
@@ -88,7 +84,7 @@ class Edit extends React.Component {
                     <TextField
                         style={style}
                         hintText={this.props.defaultAddress}
-                        floatingLabelText="Public Address"
+                        floatingLabelText="Public address"
                         floatingLabelFixed={true}
                         onChange={this.changeAddress}
                     />

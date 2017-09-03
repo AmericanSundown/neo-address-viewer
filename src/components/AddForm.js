@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
@@ -41,31 +42,39 @@ class AddForm extends Component {
     render() {
         const address = this.props.common.address;
         const name = this.props.common.name;
+        const open = this.props.navigation.showAddForm;
+        const actions = [
+            <FlatButton
+              label="Add"
+              primary={true}
+              onClick={this.addWallet(address, name)}
+            />,
+            <FlatButton
+              label="Close"
+              secondary={true}
+              onClick={this.toggleAddForm}
+            />,
+        ];
         return (
             <div>
-                <Card>
-                    <CardHeader
-                        title="Add an wallet here."
-                        subtitle="Type wallet information below."
+                <Dialog
+                    title="Add new wallet"
+                    actions={actions}
+                    modal={true}
+                    open={open}
+                >
+                    <TextField
+                        hintText=""
+                        floatingLabelText="Public address"
+                        onChange={this.changeAddress}
                     />
-                    <CardText>
-                        <TextField
-                            hintText=""
-                            floatingLabelText="Public Address"
-                            onChange={this.changeAddress}
-                        />
-                        <br/>
-                        <TextField
-                            hintText=""
-                            floatingLabelText="Name (optional)"
-                            onChange={this.changeName}
-                        />
-                    </CardText>
-                    <CardActions>
-                        <FlatButton primary={true} label="Add" onClick={this.addWallet(address, name)}/>
-                        <FlatButton secondary={true} label="Cancel" onClick={this.toggleAddForm}/>
-                    </CardActions>
-                </Card>
+                    <br/>
+                    <TextField
+                        hintText=""
+                        floatingLabelText="Name (optional)"
+                        onChange={this.changeName}
+                    />
+                </Dialog>
             </div>
         );
     }

@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import { OPEN_EDIT } from '../../constants/actionTypes'
+import { TOGGLE_EDIT_FORM } from '../../constants/actionTypes'
 import Edit from './Edit';
 import TransactionList from '../TransactionList';
 
 const mapDispatchToProps = dispatch => ({
-    onOpenEdit: () =>
-        dispatch({ type: OPEN_EDIT })
+    onToggleEdit: () =>
+        dispatch({ type: TOGGLE_EDIT_FORM })
 });
 
 class Detail extends React.Component {
     constructor() {
         super();
-        this.openEdit = (ev) => this.props.onOpenEdit();
+        this.toggleEdit = (ev) => this.props.onToggleEdit();
     }
     render() {
         const noneValue = "TBA";
@@ -30,14 +30,14 @@ class Detail extends React.Component {
                 />
                 <Card>
                     <CardHeader
-                    title={`${name}`}
-                    subtitle={`NEO: ${neo} | GAS: ${gas}`}
-                    actAsExpander={true}
-                    showExpandableButton={true}
+                        title={`${name}`}
+                        subtitle={`NEO: ${neo} | GAS: ${gas}`}
+                        actAsExpander={true}
+                        showExpandableButton={true}
                     />
                     <CardActions>
-                    <FlatButton label="Edit" onClick={this.openEdit}/>
-                    <FlatButton label="Delete" onClick={this.props.onRemove}/>
+                    <FlatButton primary={true} label="Edit" onClick={this.toggleEdit}/>
+                    <FlatButton secondary={true} label="Delete" onClick={this.props.onRemove}/>
                     </CardActions>
                     <CardText expandable={true}>
                         <p>Address: {address}</p>

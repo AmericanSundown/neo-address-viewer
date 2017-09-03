@@ -1,12 +1,11 @@
 import {
     TOGGLE_ADD_FORM,
-    OPEN_EDIT,
-    CLOSE_EDIT
+    TOGGLE_EDIT_FORM
 } from '../constants/actionTypes'
 
 const defaultState = {
-    edit: {},
-    showAddForm: false
+    showAddForm: false,
+    showEditForm: false
 };
 
 export default (state = defaultState, action) => {
@@ -16,19 +15,10 @@ export default (state = defaultState, action) => {
                 ...state,
                 showAddForm: !state.showAddForm
             };
-        case OPEN_EDIT:
+        case TOGGLE_EDIT_FORM:
             return {
                 ...state,
-                edit: {
-                    open: true
-                }
-            };
-        case CLOSE_EDIT:
-            return {
-                ...state,
-                edit: {
-                    open: false
-                }
+                showEditForm: !state.showEditForm
             };
         default:
             return state;
