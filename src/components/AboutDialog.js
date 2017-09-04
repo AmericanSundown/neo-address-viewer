@@ -37,6 +37,7 @@ class AboutDialog extends React.Component {
             >
                 <p>Thank you for using NEO address viewer.</p>
                 <p>This application saves public addresses and displays a balance of each address.</p>
+                <p>Addresses and names are stored in browser's cache. This means if the browser's cache is deleted, you would have to enter the information again.</p>
                 <p>The application does not, and will not, ask for private keys.</p>
                 <p>You should <strong>never</strong> provide your private keys to <strong>anyone</strong>.</p>
                 <br/>
