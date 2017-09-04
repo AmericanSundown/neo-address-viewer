@@ -7,6 +7,16 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { TOGGLE_FORM } from '../constants/actionTypes';
 
+const styles = {
+    menuColor: "white",
+    title: {
+        color: "white",
+    },
+    bar: {
+        backgroundColor: "#74bb38",
+    },
+};
+
 const mapStateToProps = state => ({ ...state.popup });
 
 const mapDispatchToProps = dispatch => ({
@@ -26,13 +36,15 @@ class Header extends React.Component {
         return (
             <div>
                 <AppBar
-                    title="NEO Wallet Viewer"
+                    style={styles.bar}
+                    title="NEO addreess viewer"
+                    titleStyle={styles.title}
                     showMenuIconButton={false}
                     iconElementRight={
                         <div>
                             <IconMenu
                                 iconButtonElement={
-                                    <IconButton><MoreVertIcon color={'white'} /></IconButton>
+                                    <IconButton><MoreVertIcon color={styles.menuColor} /></IconButton>
                                 }
                                 targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
