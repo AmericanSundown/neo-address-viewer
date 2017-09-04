@@ -1,10 +1,14 @@
-# NEO Public Wallet Viewer
+# NEO Address Viewer
 
-Electron application that displays NEO assets attached to the given wallet address.
+Electron application that displays NEO assets attached to the given public address.
 
 # API
 
-This application is using [API from Antchain][0].
+This application is using [Neon Light Wallet Database API][0].
 
+# Credit
 
-[0]: http://antchain.org/api/
+Icon made by [Gregor Cresnar][1].
+
+[0]: https://github.com/CityOfZion/neon-wallet-db
+[1]: https://www.flaticon.com/authors/gregor-cresnar

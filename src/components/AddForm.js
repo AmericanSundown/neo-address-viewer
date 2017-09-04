@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { ADD_WALLET, UPDATE_FIELD_ADDRESS, TOGGLE_FORM } from '../constants/actionTypes';

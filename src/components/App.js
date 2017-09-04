@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../App.css';
 import AddForm from './AddForm';
 import AboutDialog from './AboutDialog';

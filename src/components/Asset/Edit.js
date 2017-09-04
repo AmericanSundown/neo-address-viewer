@@ -1,13 +1,11 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import {
     EDIT_WALLET,
     TOGGLE_FORM,
-    TOGGLE_EDIT_FORM,
     UPDATE_FIELD_ADDRESS
 } from '../../constants/actionTypes'
 import agent from '../../agent';

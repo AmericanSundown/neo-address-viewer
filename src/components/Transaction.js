@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Subheader from 'material-ui/Subheader';
-import Divider from 'material-ui/Divider';
 import { GET_TRANSACTION } from '../constants/actionTypes';
 import agent from '../agent';
 
