@@ -2,6 +2,7 @@ import { TOGGLE_FORM } from '../constants/actionTypes'
 
 const defaultState = {
     add: false,
+    about: false,
     edit: false
 };
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import AddForm from './AddForm';
+import AboutDialog from './AboutDialog';
 import Asset from './Asset';
 import Header from './Header';
 import { connect } from 'react-redux';
@@ -19,7 +20,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <div style={style}>
-          <AddForm />
+          <AddForm open={this.props.popup.add} />
+          <AboutDialog open={this.props.popup.about} />
           <Asset />
         </div>
       </div>

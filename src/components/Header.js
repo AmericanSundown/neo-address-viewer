@@ -11,13 +11,16 @@ const mapStateToProps = state => ({ ...state.popup });
 
 const mapDispatchToProps = dispatch => ({
     onToggleAddForm: () =>
-        dispatch({ type: TOGGLE_FORM, key: 'add' })
+        dispatch({ type: TOGGLE_FORM, key: 'add' }),
+    onToggleAboutDialog: () =>
+        dispatch({ type: TOGGLE_FORM, key: 'about' })
 })
 
 class Header extends React.Component {
     constructor() {
         super();
         this.toggleAddForm = (ev) => this.props.onToggleAddForm();
+        this.toggleAboutDialog = (ev) => this.props.onToggleAboutDialog();
     }
     render() {
         return (
@@ -40,6 +43,7 @@ class Header extends React.Component {
                                 />
                                 <MenuItem
                                     primaryText="About"
+                                    onClick={this.toggleAboutDialog}
                                 />
                             </IconMenu>
                         </div>

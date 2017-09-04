@@ -48,7 +48,7 @@ class AddForm extends Component {
     render() {
         const address = this.props.common.address;
         const name = this.props.common.name;
-        const open = this.props.popup.add;
+        const open = this.props.open;
         const actions = [
             <FlatButton
               label="Add"
