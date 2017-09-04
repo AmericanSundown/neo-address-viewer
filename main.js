@@ -4,10 +4,11 @@ const url = require('url')
 
 // Use localhost server on development, index.html in production.
 const startUrl = process.env.ELECTRON_START_URL || url.format({
-  pathname: path.join(__dirname, '/../build/index.html'),
+  pathname: path.join(__dirname, '/build/index.html'),
   protocol: 'file:',
   slahes: true
 })
+const openDevTools = process.env.ELECTRON_START_URL ? true : false;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -21,7 +22,9 @@ function createWindow () {
   win.loadURL(startUrl)
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  if (openDevTools) {
+    win.webContents.openDevTools()
+  };
 
   // Emitted when the window is closed.
   win.on('closed', () => {

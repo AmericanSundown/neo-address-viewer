@@ -16,7 +16,7 @@
   "devDependencies": {
     "react-scripts": "1.0.11"
   },
-  "main": "src/electron-starter.js",
+  "main": "main.js",
   "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
