@@ -37,7 +37,7 @@ class Header extends React.Component {
             <div>
                 <AppBar
                     style={styles.bar}
-                    title="NEO addreess viewer"
+                    title="NEO address viewer"
                     titleStyle={styles.title}
                     showMenuIconButton={false}
                     iconElementRight={

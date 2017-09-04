@@ -49,9 +49,9 @@ class Transaction extends React.Component {
     render() {
         const data = this.props.data;
         const content = (<div style={styles.text}>
-            Block Index: {data.block_index}<br/>
-            Neo: {this.highlightAsset(data.NEO)}<br/>
-            Gas: {this.highlightAsset(data.GAS)}<br/>
+            Block: {data.block_index}<br/>
+            NEO: {this.highlightAsset(data.NEO)}<br/>
+            GAS: {this.highlightAsset(data.GAS)}<br/>
         </div>);
         return (content);
     }

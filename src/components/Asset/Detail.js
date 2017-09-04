@@ -36,6 +36,7 @@ class Detail extends React.Component {
         const address = this.props.data.address ? this.props.data.address : noneValue;
         const neo = this.props.data.assets ? this.props.data.assets.neo.balance : noneValue;
         const gas = this.props.data.assets ? this.props.data.assets.gas.balance : noneValue;
+        const subTitle = <p>{`NEO: ${neo}`}<br/>{`GAS: ${gas}`}</p>;
         return (
             <div>
                 <Edit
@@ -46,7 +47,7 @@ class Detail extends React.Component {
                     <CardHeader
                         title={`${name}`}
                         titleStyle={styles.text}
-                        subtitle={`NEO: ${neo} | GAS: ${gas}`}
+                        subtitle={subTitle}
                         subtitleStyle={styles.text}
                         actAsExpander={true}
                         showExpandableButton={true}
