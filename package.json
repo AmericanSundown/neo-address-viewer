@@ -2,7 +2,9 @@
   "name": "neo-address-viewer",
   "productName": "NEO Address Viewer",
   "version": "0.1.0",
+  "description": "Electron application to view a balance on NEO public address.",
   "private": true,
+  "repository": "https://github.com/hyunchel/neo-address-viewer",
   "dependencies": {
     "electron": "^1.7.5",
     "material-ui": "^0.19.0",
@@ -15,7 +17,12 @@
     "superagent-promise": "^1.1.0"
   },
   "devDependencies": {
-    "react-scripts": "1.0.11"
+    "electron-installer-dmg": "^0.2.1",
+    "electron-packager": "^9.0.1",
+    "electron-winstaller": "^2.6.3",
+    "npm-run-all": "^4.1.1",
+    "react-scripts": "1.0.11",
+    "rimraf": "^2.6.1"
   },
   "main": "main.js",
   "homepage": ".",
@@ -25,6 +32,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "package": "npm-run-all package:*",
+    "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=release --icon=assets/icon/mac/icon.icns --prune=true",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=release --icon=assets/icon/win/icon.ico --prune=true --asar=true",
+    "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=release --icon=assets/icon/png/icon.png --prune=true",
+    "package:installer": "node ./script/installer.js"
   }
 }
